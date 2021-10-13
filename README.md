@@ -80,4 +80,4 @@ In the following table we will see the types shown by the tool:
 |         | `FUNC; ...`                | Functional type overloaded |
 | `FUNC`  | `forall VAR, ...: (TYPE, ...) -> TYPE` | Functional scheme type |
 
-Remember that `[]` is literal that represents the empty list. Atoms, integer and floats literals are the same used in Erlang.
+Remember that `[]` is the literal that represents the empty list. Atoms, integer and floats literals are the same used in Erlang.
