@@ -8,9 +8,9 @@ These are the bash commands to use the tool:
 
 * **meta&#46;sh**: Runs the tool with a list of options and files to analyse. The working folder of this script is the *tests* folder.
 * **build&#46;sh**: Builds the tool using the Erlang compiler command. The compiled BEAM files will be in the folder *./out/production/meta*.
-* **generate&#46;sh**: This script generates the Erlang code to parse Mini-Erlang source code files. It will be necesary only when a modification is done in the *minierlang&#46;yrl* file.
+* **generate&#46;sh**: This script generates the Erlang code to parse Mini-Erlang source code files. It will be necessary only when a modification is done in the *minierlang&#46;yrl* file.
 * **debugb&#46;sh**: Builds the tool like *build&#46;sh* but adding the debug info needed by the Erlang debugger.
-* **debug&#46;sh**: Runs the Erlang debugger to debbug the tool if needed.
+* **debug&#46;sh**: Runs the Erlang debugger to debug the tool if needed.
 
 For example, to build and run the tool you can use this command:
 
@@ -24,9 +24,9 @@ The main options of the tool are:
 * **-v**, **--version**: Shows the version of the tool.
 * **-c**, **--code**: Shows the source code of the files being analysed.
 
-### Mini-Erlang syntax
+## Mini-Erlang syntax
 
-This follows is the BNF syntax for the Mini-Erlang language:
+This follow is the BNF syntax for the Mini-Erlang language:
 
 ```
 expression  ::= variable
@@ -55,7 +55,7 @@ clauses     ::= clause     | clause "," clauses
 patterns    ::= pattern    | pattern "," patterns
 ```
 
-### Types syntax
+## Types syntax
 
 In the following table we will see the types shown by the tool:
 
