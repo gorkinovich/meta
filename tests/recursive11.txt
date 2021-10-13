@@ -1,0 +1,12 @@
+letrec
+    Foo = fun(X) ->
+        case X of
+            0 when 'true' ->
+                {}
+            Z when 'true' ->
+                let N = X - 1 in
+                let Y = Foo(N) in
+                {X, Y}
+        end
+in
+    Foo

@@ -1,0 +1,1 @@
+fun(X) -> fun(Y) -> X + Y

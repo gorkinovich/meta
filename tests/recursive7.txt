@@ -1,0 +1,14 @@
+letrec
+    At = fun(N, L) ->
+        case L of
+            [X|XS] when 'true' ->
+                case N of
+                    0 when 'true' ->
+                        X
+                    Z when 'true' ->
+                        let M = N - 1 in
+                        At(M, XS)
+                end
+        end
+in
+    At

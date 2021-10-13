@@ -1,0 +1,10 @@
+letrec
+    Append = fun(L, YS) ->
+        case L of
+            [] when 'true' ->
+                YS
+            [X|XS] when 'true' ->
+                [X|Append(XS, YS)]
+        end
+in
+    Append

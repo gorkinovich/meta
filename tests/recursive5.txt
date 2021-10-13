@@ -1,0 +1,12 @@
+letrec
+    Reverse2 = fun(L, YS) ->
+        case L of
+            [] when 'true' ->
+                YS
+            [X|XS] when 'true' ->
+                let TS = [X|YS] in
+                Reverse2(XS, TS)
+        end
+    Reverse = fun(V) -> Reverse2(V, [])
+in
+    Reverse2

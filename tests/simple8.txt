@@ -1,0 +1,9 @@
+letrec
+    P = fun(A) ->
+        case A of
+            B when is_integer(B) -> B > 1
+        end
+
+    Q = fun(C) -> P(C)
+in
+    {P, Q}

@@ -1,0 +1,11 @@
+letrec
+    Map = fun(F, L) ->
+        case L of
+            [] when 'true' ->
+                []
+            [X|XS] when 'true' ->
+                [F(X)|Map(F, XS)]
+        end
+in let Foo = fun(A) -> A + 1
+in let L2 = ['a', 'b', 'c', 'd']
+in Map(Foo, L2)

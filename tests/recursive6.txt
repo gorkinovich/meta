@@ -1,0 +1,12 @@
+letrec
+    Reverse = fun(L) ->
+        case L of
+            [] when 'true' ->
+                []
+            [X|XS] when 'true' ->
+                let N = Reverse(XS) in
+                let M = [X] in
+                N ++ M
+        end
+in
+    Reverse

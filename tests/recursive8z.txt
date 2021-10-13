@@ -1,0 +1,12 @@
+letrec
+    Find2 = fun(N, V, L) ->
+        case L of
+            [X|XS] when X =:= V ->
+                N
+            [Y|YS] when 'true' ->
+                let M = N + 1 in
+                Find2(M, V, YS)
+        end
+    Find = fun(V1, L1) -> Find2(0, V1, L1)
+in
+    {Find, Find2}

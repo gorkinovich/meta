@@ -1,0 +1,19 @@
+letrec
+    Append = fun(L1, L2) ->
+        case L1 of
+            [] when 'true' ->
+                L2
+            [V3|L3] when 'true' ->
+                [V3|Append(L3, L2)]
+        end
+    Reverse = fun(L) ->
+        case L of
+            [] when 'true' ->
+                []
+            [X|XS] when 'true' ->
+                let N = Reverse(XS) in
+                let M = [X] in
+                Append(N, M)
+        end
+in
+    Reverse

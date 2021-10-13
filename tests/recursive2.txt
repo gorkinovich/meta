@@ -1,0 +1,12 @@
+letrec
+    Fact = fun(X) ->
+        case X of
+            0 when 'true' ->
+                1
+            Z when 'true' ->
+                let N = X - 1 in
+                let Y = Fact(N) in
+                Y * X
+        end
+in
+    Fact

@@ -1,0 +1,11 @@
+letrec
+    Length = fun(L) ->
+        case L of
+            [] when 'true' ->
+                0
+            [X|XS] when 'true' ->
+                let N = Length(XS) in
+                N + 1
+        end
+in
+    Length

@@ -1,0 +1,12 @@
+letrec
+    Sum = fun(X) ->
+        case X of
+            0 when 'true' ->
+                0
+            Z when 'true' ->
+                let N = X - 1 in
+                let Y = Sum(N) in
+                Y + X
+        end
+in
+    Sum

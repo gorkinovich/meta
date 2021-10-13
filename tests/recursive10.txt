@@ -1,0 +1,16 @@
+letrec
+    Filter = fun(F, L) ->
+        case L of
+            [] when 'true' ->
+                []
+            [X|XS] when 'true' ->
+                let T = F(X) in
+                case T of
+                    'false' when 'true' ->
+                        Filter(F, XS)
+                    'true' when 'true' ->
+                        [X|Filter(F, XS)]
+                end
+        end
+in
+    Filter
