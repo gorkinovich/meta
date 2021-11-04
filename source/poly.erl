@@ -905,12 +905,23 @@ internal_infimum({?TYPE_UNION, true, Types}, Right) ->
 internal_infimum(Left, {?TYPE_UNION, true, Types}) ->
     type:sequence([general_infimum(Left, Type) || Type <- Types]);
 internal_infimum({?TYPE_UNION, false, Types}, Right) ->
-    type:union([general_infimum(Type, Right) || Type <- Types]);
+    internal_infimum_union({?TYPE_UNION, false, Types}, Right);
 internal_infimum(Left, {?TYPE_UNION, false, Types}) ->
-    type:union([general_infimum(Left, Type) || Type <- Types]);
+    internal_infimum_union(Left, {?TYPE_UNION, false, Types});
 % Default section:
 internal_infimum(_, _) ->
     type:none().
+
+%%-------------------------------------------------------------------------------------------
+%% @private
+%% @doc
+%% Utility function for 'fun internal_infimum/2'.
+%% @end
+%%-------------------------------------------------------------------------------------------
+internal_infimum_union(Union, Other) ->
+    {?TYPE_UNION, false, Types} = normalize:union_variables(Union),
+    NextUnion = type:union([general_infimum(Type, Other) || Type <- Types]),
+    normalize:union_variables_remove(NextUnion).
 
 %%-------------------------------------------------------------------------------------------
 %% @private
