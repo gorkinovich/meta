@@ -757,18 +757,20 @@ apply_rule_infimum([First | Constraints], Result) ->
                         true ->
                             apply_rule_infimum([First | Others], [Second | Result]);
                         _ ->
-                            util:list_flatten_map(
-                                poly:infimum(Left, Right),
-                                fun(Item) ->
-                                    {FTP, FRS} = case Item of
-                                                     {?TYPE_CONDITION, RT, RCS} ->
-                                                         {RT, constraint:merge(RCS, Result)};
-                                                     RT ->
-                                                         {RT, Result}
-                                                 end,
-                                    apply_rule_infimum([constraint:match(Variable, FTP) | Others], FRS)
-                                end
-                            )
+                            case data:get_experimental() of
+                                true ->
+                                    apply_rule_infimum_call(Variable, Left, Right, Others, Result);
+                                _ ->
+                                    LVS = query:get_free_variables(Left),
+                                    RVS = query:get_free_variables(Right),
+                                    case util:list_intersection(LVS, RVS) of
+                                        [] ->
+                                            apply_rule_infimum_call(Variable, Left, Right, Others, Result);
+                                        _ ->
+                                            apply_rule_infimum([First | Others], [Second | Result])
+                                    end
+
+                            end
                     end;
                 {{?CONSTRAINT_MATCH, _, _}, _} ->
                     apply_rule_infimum([First | Others], [Second | Result]);
@@ -776,3 +778,23 @@ apply_rule_infimum([First | Constraints], Result) ->
                     apply_rule_infimum(Constraints, [First | Result])
             end
     end.
+
+%%-------------------------------------------------------------------------------------------
+%% @private
+%% @doc
+%% Utility function for 'fun apply_rule_infimum/2'.
+%% @end
+%%-------------------------------------------------------------------------------------------
+apply_rule_infimum_call(Variable, Left, Right, Others, Result) ->
+    util:list_flatten_map(
+        poly:infimum(Left, Right),
+        fun(Item) ->
+            {FTP, FRS} = case Item of
+                             {?TYPE_CONDITION, RT, RCS} ->
+                                 {RT, constraint:merge(RCS, Result)};
+                             RT ->
+                                 {RT, Result}
+                         end,
+            apply_rule_infimum([constraint:match(Variable, FTP) | Others], FRS)
+        end
+    ).
