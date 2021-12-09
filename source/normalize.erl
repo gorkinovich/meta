@@ -600,9 +600,14 @@ condition_constraints_strong(Class, Left, Right) ->
             {NICS, NECS} = extract_constraints_strong(InnerType, InnerConstraints, false),
             {{Class, Left, type:condition(InnerType, NICS)}, NECS};
         {?TYPE_LAMBDA, Parameters, {?TYPE_CONDITION, InnerType, InnerConstraints}} ->
-            {NICS, NECS} = extract_constraints_strong(type:lambda(Parameters, InnerType), InnerConstraints, true),
-            NextValue = type:lambda(Parameters, type:condition(InnerType, NICS)),
-            {{Class, Left, NextValue}, NECS};
+            case data:get_experimental() of
+                true ->
+                    {NICS, NECS} = extract_constraints_strong(type:lambda(Parameters, InnerType), InnerConstraints, true),
+                    NextValue = type:lambda(Parameters, type:condition(InnerType, NICS)),
+                    {{Class, Left, NextValue}, NECS};
+                _ ->
+                    {{Class, Left, Right}, []}
+            end;
         _ ->
             {{Class, Left, Right}, []}
     end.
